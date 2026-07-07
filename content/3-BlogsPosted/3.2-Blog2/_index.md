@@ -1,28 +1,26 @@
 ---
 title: "Blog 2"
-date: 2024-01-01
+date: 2026-04-17
 weight: 1
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# SESSION POLICIES IN AMAZON EKS POD IDENTITY
 
-Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.
+# BUILDING EVENT-DRIVEN ARCHITECTURES ON AWS WITH AMAZON EVENTBRIDGE, AMAZON SNS, AND AMAZON SQS
+
+Event-Driven Architecture (EDA) enables distributed applications to communicate through events instead of making direct REST API calls. On AWS, this architectural pattern can be implemented using services such as Amazon API Gateway, AWS Lambda, Amazon EventBridge, Amazon SNS, and Amazon SQS. By decoupling producers from consumers through asynchronous messaging, EDA improves scalability, resiliency, and extensibility while reducing dependencies between system components.
 
 Key points to know:
 
-* A session policy is an inline IAM policy specified when creating or updating a Pod Identity association.
-* Effective permissions = intersection between the IAM role permissions and the session policy → the session policy can only narrow permissions, not expand them.
-* Helps avoid over-permissioning when reusing a single IAM role for multiple workloads with different needs.
-* Supports both same-account and cross-account (via IAM role chaining).
-* Significantly reduces the number of IAM roles that need to be managed, helping avoid hitting IAM quota limits in large clusters.
-* Easily configured through the AWS Management Console, AWS CLI, or AWS SDK when creating an association between a Kubernetes ServiceAccount and an IAM role.
+* Event producers publish events instead of invoking downstream services: After completing business logic, an AWS Lambda function publishes an event to Amazon EventBridge rather than calling another service directly. This loose coupling allows individual services to evolve, deploy, and scale independently.
+* Amazon EventBridge provides intelligent event routing: EventBridge receives events, filters them using event patterns, and routes them to the appropriate targets based on configured rules. It also supports cross-account event routing, making it well suited for enterprise and multi-account AWS environments.
+* Amazon SNS enables publish/subscribe messaging: A single event can be delivered simultaneously to multiple subscribers, including AWS Lambda functions, Amazon SQS queues, HTTP endpoints, and email recipients. New subscribers can be added without requiring any changes to the event producer.
+* Amazon SQS enables reliable asynchronous processing: Amazon SQS stores events in durable message queues, absorbs traffic spikes, supports automatic retries, and integrates with Dead-Letter Queues (DLQs) to isolate failed messages. This improves application resilience and minimizes the risk of message loss.
+* The architecture is highly extensible: New capabilities, such as email notifications, audit logging, analytics pipelines, data lake integration, or machine learning workloads, can be introduced by simply adding new event consumers. Existing producers and consumers remain unchanged.
+* Serverless services simplify scalability and cost optimization: Amazon API Gateway, AWS Lambda, Amazon EventBridge, Amazon SNS, and Amazon SQS automatically scale based on workload demand while following a pay-as-you-go pricing model, eliminating the need to manage infrastructure and reducing operational costs.
 
-This feature is especially useful when you have many applications running on the same IAM role but need different permission restrictions (for example: one pod only reads a specific S3 bucket, another pod only calls certain APIs).
+Event-Driven Architecture is particularly valuable for microservices, asynchronous workflows, enterprise integrations, and multi-account AWS environments, where loose coupling, fault tolerance, and scalability are critical. By combining Amazon EventBridge, Amazon SNS, and Amazon SQS, organizations can build resilient event-driven applications that are easier to maintain, extend, and adapt to evolving business requirements.
 
 ...Image...
 
