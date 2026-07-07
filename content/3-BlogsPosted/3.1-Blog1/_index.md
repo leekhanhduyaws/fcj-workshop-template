@@ -12,7 +12,7 @@ Amazon EKS Pod Identity enables Pods to securely access AWS services without rel
 
 Key highlights include:
 
-* **Session Policies are applied when a Pod assumes an IAM Role:** These policies are enforced during the `AssumeRole` process to restrict a Pod's access to AWS resources without requiring additional IAM Roles.
+* **Session Policies are applied when a Pod assumes an IAM Role:** These policies are enforced during the AssumeRole process to restrict a Pod's access to AWS resources without requiring additional IAM Roles.
 * **Effective permissions are the intersection of the IAM Role and the Session Policy:** A Pod can perform only the actions that are permitted by both the IAM Role and the Session Policy. Session Policies cannot grant new permissions; they can only further restrict existing ones.
 * **Simplified IAM management:** Multiple Pods can share the same IAM Role, while Session Policies define different permission scopes for individual workloads, reducing the number of IAM Roles that need to be maintained.
 * **Improved security through the principle of least privilege:** Each Pod receives only the permissions required for its specific workload, minimizing security risks if the Pod or application is compromised.
