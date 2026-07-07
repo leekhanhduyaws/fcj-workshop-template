@@ -17,7 +17,7 @@ chapter: false
 
 &emsp; **Ngành:** Công nghệ thông tin
 
-&emsp; **Lớp:** FCAJ-Hutech-2026
+&emsp; **Lớp:** AWS042026
 
 &emsp; **Công ty thực tập:** Amazon Web Services Viet Nam Company Limited
 
