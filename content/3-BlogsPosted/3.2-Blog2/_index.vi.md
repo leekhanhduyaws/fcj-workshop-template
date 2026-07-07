@@ -22,8 +22,13 @@ Các điểm chính cần nắm:
 
 Kiến trúc này đặc biệt phù hợp với các hệ thống Microservices, xử lý bất đồng bộ, tích hợp đa hệ thống hoặc môi trường đa tài khoản AWS, nơi yêu cầu khả năng mở rộng cao, giảm sự phụ thuộc giữa các dịch vụ và tăng khả năng chịu lỗi của toàn bộ hệ thống.
 
-...Hình ảnh...
+<p align="center">
+  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog2/img2.png" width="700">
+</p>
 
-...Link...
+<p align="center">
+  <em>Hình 1. Event-driven architecture using Amazon EventBridge, Amazon SNS, and Amazon SQS.</em>
+</p>
 
-...Hướng dẫn...
+## Link bài viết
+
