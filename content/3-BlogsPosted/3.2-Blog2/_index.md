@@ -22,8 +22,14 @@ Key points to know:
 
 Event-Driven Architecture is particularly valuable for microservices, asynchronous workflows, enterprise integrations, and multi-account AWS environments, where loose coupling, fault tolerance, and scalability are critical. By combining Amazon EventBridge, Amazon SNS, and Amazon SQS, organizations can build resilient event-driven applications that are easier to maintain, extend, and adapt to evolving business requirements.
 
-...Image...
+## Illustration
+<p align="center">
+  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog2/img2.png" width="700">
+</p>
 
-...Link...
+<p align="center">
+  <em>Figure 1. Event-driven architecture using Amazon EventBridge, Amazon SNS, and Amazon SQS.</em>
+</p>
 
-...Guide...
+## Article Link
+[🔗 View the article on Facebook](https://web.facebook.com/share/p/18tYHRgbgh/?_rdc=1&_rdr)
