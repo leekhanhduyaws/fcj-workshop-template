@@ -31,5 +31,4 @@ Kiến trúc này đặc biệt phù hợp với các hệ thống Microservices
 </p>
 
 ## Link bài viết
-
 [🔗 Xem bài viết trên Facebook](https://web.facebook.com/share/p/18tYHRgbgh/?_rdc=1&_rdr)
