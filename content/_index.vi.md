@@ -13,7 +13,7 @@ chapter: false
 
 &emsp; **Email:** lekhanhduy010504@gmail.com
 
-&emsp; **Trường:** HUTECH University of Technology
+&emsp; **Trường:** Trường Đại học Công nghệ TP.HCM
 
 &emsp; **Ngành:** Công nghệ thông tin
 
