@@ -28,7 +28,7 @@ Kiến trúc Data Lake sử dụng Amazon S3, AWS Glue và Amazon Athena là gi�
 </p>
 
 <p align="center">
-  <em>Hình 1. Kiến trúc Amazon EKS Pod Identity và Session Policies.</em>
+  <em>Hình 1. Kiến trúc Data Lake trên AWS sử dụng Amazon S3 và Amazon Athena.</em>
 </p>
 
 ## Link bài viết
