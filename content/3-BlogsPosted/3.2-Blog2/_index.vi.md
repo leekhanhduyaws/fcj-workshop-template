@@ -1,28 +1,26 @@
 ---
 title: "Blog 2"
-date: 2024-01-01
+date: 2024-04-17
 weight: 1
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# SESSION POLICIES TRONG AMAZON EKS POD IDENTITY
 
-Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
+# KIẾN TRÚC EVENT-DRIVEN TRÊN AWS VỚI AMAZON EVENTBRIDGE, AMAZON SNS VÀ AMAZON SQS 
+
+Event-Driven Architecture là một mô hình thiết kế hệ thống trong đó các thành phần giao tiếp với nhau thông qua Event thay vì gọi trực tiếp bằng REST API. Trên AWS, kiến trúc này có thể được triển khai hiệu quả với các dịch vụ như Amazon API Gateway, AWS Lambda, Amazon EventBridge, Amazon SNS và Amazon SQS, giúp giảm sự phụ thuộc giữa các service, tăng khả năng mở rộng và nâng cao tính ổn định của hệ thống khi xử lý bất đồng bộ. 
 
 Các điểm chính cần nắm:
 
-* Session policy là một IAM policy inline được chỉ định khi tạo hoặc cập nhật Pod Identity association.
-* Quyền hiệu quả = intersection (giao) giữa permissions của IAM role và session policy → session policy chỉ có thể thu hẹp, không thể mở rộng quyền.
-* Giúp tránh tình trạng over-permissioning khi reuse chung một IAM role cho nhiều workloads có nhu cầu khác nhau.
-* Hỗ trợ cả same-account và cross-account (qua IAM role chaining).
-* Giảm đáng kể số lượng IAM roles cần quản lý, tránh chạm giới hạn quota IAM trong cluster lớn.
-* Cấu hình dễ dàng qua AWS Management Console, AWS CLI hoặc AWS SDK khi tạo association giữa Kubernetes ServiceAccount và IAM role.
+* Producer chỉ phát sinh Event: Sau khi xử lý nghiệp vụ, AWS Lambda sẽ gửi Event đến Amazon EventBridge thay vì gọi trực tiếp sang service khác, giúp giảm coupling giữa các thành phần trong hệ thống.
+* Amazon EventBridge chịu trách nhiệm định tuyến Event: EventBridge tiếp nhận, lọc và chuyển tiếp Event theo các Rule đã cấu hình, đồng thời hỗ trợ truyền sự kiện giữa nhiều AWS Account.
+* Amazon SNS thực hiện cơ chế Publish/Subscribe: Một Event có thể được phát tán đồng thời đến nhiều Subscriber như AWS Lambda, Amazon SQS, HTTP Endpoint hoặc Email mà không cần thay đổi Producer.
+* Amazon SQS đảm bảo xử lý bất đồng bộ: SQS hoạt động như một hàng đợi (Queue), giúp lưu trữ Event tạm thời, hấp thụ lưu lượng truy cập tăng đột biến, hỗ trợ Retry và Dead Letter Queue (DLQ) nhằm hạn chế mất dữ liệu khi Consumer gặp lỗi.
+* Kiến trúc dễ dàng mở rộng: Khi cần bổ sung các chức năng như gửi Email, Audit Log, Data Lake hoặc Machine Learning, chỉ cần thêm Consumer mới đăng ký nhận Event mà không ảnh hưởng đến các thành phần hiện có.
+* Tối ưu chi phí và khả năng mở rộng: Việc sử dụng các dịch vụ Serverless như API Gateway, Lambda, EventBridge, SNS và SQS giúp hệ thống tự động mở rộng theo lưu lượng truy cập và chỉ phát sinh chi phí khi có yêu cầu xử lý.
 
-Tính năng này đặc biệt hữu ích khi bạn có nhiều ứng dụng chạy trên cùng một IAM role nhưng cần giới hạn quyền khác nhau (ví dụ: một pod chỉ đọc S3 bucket cụ thể, pod khác chỉ gọi một số API nhất định).
+Kiến trúc này đặc biệt phù hợp với các hệ thống Microservices, xử lý bất đồng bộ, tích hợp đa hệ thống hoặc môi trường đa tài khoản AWS, nơi yêu cầu khả năng mở rộng cao, giảm sự phụ thuộc giữa các dịch vụ và tăng khả năng chịu lỗi của toàn bộ hệ thống.
 
 ...Hình ảnh...
 
