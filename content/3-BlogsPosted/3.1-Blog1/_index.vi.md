@@ -23,13 +23,15 @@ Các điểm chính cần nắm:
 Session Policies đặc biệt hữu ích trong các hệ thống Microservices, nơi nhiều Pod sử dụng chung một IAM Role nhưng yêu cầu phạm vi truy cập tài nguyên AWS khác nhau. Ví dụ, một Pod chỉ cần quyền đọc dữ liệu từ một Amazon S3 Bucket cụ thể, trong khi Pod khác cần truy cập thêm Amazon DynamoDB hoặc Amazon SQS. Bằng cách kết hợp Pod Identity với Session Policies, hệ thống vừa duy trì được khả năng quản lý tập trung vừa đảm bảo mỗi Pod chỉ có đúng những quyền cần thiết để thực hiện chức năng của mình.
 
 ## Hình ảnh minh họa
+
 <p align="center">
-  <img src="/images/3-BlogsPosted/Blog1/img1.png" width="700" alt="Kiến trúc Amazon EKS Pod Identity">
+  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog1/img1.png" width="700">
 </p>
 
 <p align="center">
   <em>Hình 1. Kiến trúc Amazon EKS Pod Identity và Session Policies.</em>
 </p>
+
 ## Link bài viết
 
 [🔗 Xem bài viết trên Facebook](https://www.facebook.com/share/p/1Bf61McbW7/)
