@@ -24,7 +24,7 @@ Session Policies đặc biệt hữu ích trong các hệ thống Microservices,
 
 ## Hình ảnh minh họa
 
-<img src="/images/3-BlogsPosted/Blog1/img1.png" width="700">
+![Hình minh họa](/images/3-BlogsPosted/Blog1/img1.png)
 
 ## Link bài viết
 
