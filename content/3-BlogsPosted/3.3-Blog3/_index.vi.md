@@ -21,8 +21,17 @@ Các điểm chính cần nắm:
 
 Kiến trúc Data Lake sử dụng Amazon S3, AWS Glue và Amazon Athena là giải pháp phù hợp cho các hệ thống yêu cầu lưu trữ và phân tích khối lượng lớn dữ liệu với chi phí tối ưu. Việc lưu trữ dữ liệu tập trung trên Amazon S3 kết hợp với khả năng quản lý Metadata của AWS Glue và truy vấn Serverless của Amazon Athena giúp đơn giản hóa quy trình khai thác dữ liệu, nâng cao khả năng mở rộng của hệ thống và tạo nền tảng cho các ứng dụng phân tích dữ liệu, báo cáo Business Intelligence cũng như Machine Learning trong tương lai.
 
-...Hình ảnh...
+## Hình ảnh minh họa
 
-...Link...
+<p align="center">
+  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog3/img3.png" width="700">
+</p>
 
-...Hướng dẫn...
+<p align="center">
+  <em>Hình 1. Kiến trúc Amazon EKS Pod Identity và Session Policies.</em>
+</p>
+
+## Link bài viết
+
+[🔗 Xem bài viết trên Facebook](https://web.facebook.com/share/p/1Bn86KFzSx/?_rdc=1&_rdr)
+
