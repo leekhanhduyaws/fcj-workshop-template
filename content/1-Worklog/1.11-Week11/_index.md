@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 1.11. </b> "
 ---
 
-### Objectives for Week 11:
+### Week 11 Objectives:
 
 * Design the core APIs.
 * Build the database.
