@@ -19,9 +19,9 @@ pre: " <b> 1.1. </b> "
 | --- | --- | --- | --- | --- |
 | 2 | Hoàn tất đăng ký tài khoản AWS.<br>Thành lập nhóm. | 20/04/2026 | 21/04/2026 | [Video hướng dẫn](https://www.youtube.com/watch?v=2QSXYi6Ofmc&t=1s) |
 | 3 | Thực hiện nhiệm vụ để nhận **$200 Credit**. | 21/04/2026 | 22/04/2026 | [Hướng dẫn nhận $200 Credit](https://000001.awsstudygroup.com/3-chi%E1%BA%BFn-l%C6%B0%E1%BB%A3c-nh%E1%BA%ADn-%C4%91%E1%BB%A7-200-credit/) |
-| 4 | Xây dựng chiến lược quản lý ngân sách và tối ưu hóa chi phí. | 22/04/2026 | 23/04/2026 | [Quản lý Chi phí AWS](https://000004.awsstudygroup.com/) |
-| 5 | Nghiên cứu kiến thức nền tảng về các mô hình triển khai điện toán đám mây (công cộng, riêng tư, lai) và các dịch vụ đám mây (SaaS, PaaS, IaaS). | 23/04/2026 | 24/04/2026 | [Tổng quan về Điện toán đám mây](https://000003.awsstudygroup.com/) |
-| 6 | Thiết lập và cấu hình môi trường AWS CLI. | 24/04/2026 | 26/04/2026 | [Hướng dẫn cài đặt và cấu hình AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
+| 4 | Xây dựng chiến lược quản lý ngân sách và tối ưu hóa chi phí. | 22/04/2026 | 23/04/2026 | [Quản lý Chi phí AWS]([https://000004.awsstudygroup.com/](https://aws.amazon.com/vi/aws-cost-management/)) |
+| 5 | Nghiên cứu kiến thức nền tảng về các mô hình triển khai điện toán đám mây (công cộng, riêng tư, lai) và các dịch vụ đám mây (SaaS, PaaS, IaaS). | 23/04/2026 | 24/04/2026 | [Tổng quan về Điện toán đám mây]([https://000003.awsstudygroup.com/](https://www.youtube.com/watch?v=HxYZAK1coOI&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=4)) |
+| 6 | Thiết lập và cấu hình môi trường AWS CLI. | 24/04/2026 | 26/04/2026 | [Hướng dẫn cài đặt và cấu hình AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) |
 
 ### Kết quả đạt được tuần 1:
 
