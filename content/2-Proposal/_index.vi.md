@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
 
 # FLASHLEARN PLATFORM
 
