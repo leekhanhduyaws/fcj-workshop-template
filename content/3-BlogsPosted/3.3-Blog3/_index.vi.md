@@ -10,7 +10,7 @@ pre: " <b> 3.3. </b> "
 
 Kiến trúc Data Lake trên AWS cung cấp giải pháp lưu trữ và phân tích dữ liệu tập trung dành cho các hệ thống phát sinh khối lượng lớn dữ liệu như log ứng dụng, dữ liệu giao dịch, dữ liệu IoT hoặc dữ liệu người dùng. Thay vì lưu trữ toàn bộ dữ liệu trên cơ sở dữ liệu truyền thống, dữ liệu được lưu trực tiếp dưới dạng thô (Raw Data) trên Amazon S3, sau đó được quản lý bằng AWS Glue Data Catalog và truy vấn thông qua Amazon Athena. Giải pháp này giúp giảm chi phí lưu trữ, tăng khả năng mở rộng và cho phép khai thác dữ liệu hiệu quả mà không cần triển khai hoặc quản lý hạ tầng xử lý dữ liệu.
 
-Các điểm chính cần nắm:
+Các điểm chính cần nắm: 
 
 * Lưu trữ dữ liệu trên Amazon S3: Dữ liệu từ các hệ thống ứng dụng, log server, thiết bị IoT hoặc các nguồn dữ liệu khác được lưu trữ trực tiếp trên Amazon S3 dưới nhiều định dạng như JSON, CSV, Apache Parquet hoặc các tệp Log. Amazon S3 cung cấp khả năng lưu trữ bền vững với độ sẵn sàng cao và không yêu cầu xác định cấu trúc dữ liệu trước khi lưu.
 * Tối ưu chi phí lưu trữ: Amazon S3 hỗ trợ nhiều Storage Class như Standard, Standard-IA, Intelligent-Tiering và Glacier, cho phép tự động hoặc chủ động tối ưu chi phí lưu trữ dựa trên tần suất truy cập dữ liệu. Việc lưu trữ dữ liệu trên S3 giúp giảm đáng kể chi phí so với việc sử dụng cơ sở dữ liệu để lưu trữ dữ liệu lịch sử hoặc dữ liệu ít được truy cập.
