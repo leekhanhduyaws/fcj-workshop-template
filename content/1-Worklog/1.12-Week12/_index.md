@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 1.12 </b> "
 ---
 
-### Objectives for Week 12:
+### Week 12 Objectives:
 
 * Complete the community interaction features.
 * Develop the core system logic.
