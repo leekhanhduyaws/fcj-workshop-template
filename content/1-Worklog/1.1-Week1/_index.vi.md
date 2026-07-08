@@ -17,7 +17,7 @@ pre: " <b> 1.1. </b> "
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Làm quen với đơn vị thực tập và các thành viên First Cloud AI Journey.<br>- Tìm hiểu quy định và quy trình làm việc trong quá trình thực tập. | 20/04/2026 | 20/04/2026 | https://cloudjourney.awsstudygroup.com/ |
+| 2 | - Làm quen với đơn vị thực tập và các thành viên First Cloud AI Journey.<br>- Tìm hiểu quy định và quy trình làm việc trong quá trình thực tập. | 20/04/2026 | 20/04/2026 | https://www.youtube.com/watch?v=2QSXYi6Ofmc&t=1s |
 | 3 | - Tìm hiểu tổng quan về AWS và điện toán đám mây.<br>&emsp;+ Compute<br>&emsp;+ Storage<br>&emsp;+ Networking<br>&emsp;+ Database<br>&emsp;+ Security | 21/04/2026 | 22/04/2026 | https://cloudjourney.awsstudygroup.com/ |
 | 4 | - Tạo tài khoản AWS Free Tier.<br>- Tìm hiểu AWS Management Console và AWS CLI.<br>- **Thực hành:**<br>&emsp;+ Cài đặt AWS CLI.<br>&emsp;+ Cấu hình Access Key, Secret Key và Region.<br>&emsp;+ Kiểm tra kết nối AWS CLI. | 22/04/2026 | 23/04/2026 | https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html |
 | 5 | - Tìm hiểu Amazon EC2 cơ bản.<br>&emsp;+ Instance Types<br>&emsp;+ Amazon Machine Image (AMI)<br>&emsp;+ Amazon EBS<br>- Tìm hiểu Elastic IP.<br>- Nghiên cứu các phương thức kết nối SSH đến EC2. | 23/04/2026 | 24/04/2026 | https://docs.aws.amazon.com/ec2/ |
