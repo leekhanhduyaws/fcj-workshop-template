@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 1.3. </b> "
 ---
 
-### Objectives for Week 3:
+### Week 3 Objectives:
 
 * Develop a comprehensive understanding of the Amazon EC2 architecture, including load balancing mechanisms and automatic resource scaling strategies.
 * Explore modern data storage models and AWS solutions for database migration.
