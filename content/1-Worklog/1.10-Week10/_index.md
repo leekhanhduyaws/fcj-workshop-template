@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
-### Objectives for Week 10:
+### Week 10 Objectives:
 
 * Optimize system performance by refining the caching mechanism on Amazon CloudFront and improving database queries on Amazon RDS for PostgreSQL to reduce page load times and API response latency.
 * Automate content processing by deploying AWS Lambda functions to resize and compress user-uploaded images stored in Amazon S3, thereby improving storage efficiency.
