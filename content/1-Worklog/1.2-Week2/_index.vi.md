@@ -16,11 +16,12 @@ pre: " <b> 1.2. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | Tìm hiểu hệ sinh thái dịch vụ AWS (Compute, Storage, Networking, Database) thông qua hạ tầng trung tâm dữ liệu. | 27/04/2026 | 27/04/2026 | [AWS Cloud Products Overview( https://aws.amazon.com/vi/products/)] |
-| 3 | Nghiên cứu chuyên sâu danh mục các giải pháp AWS dựa trên tài liệu hướng dẫn CloudJourney. | 27/04/2026 | 30/04/2026 | https://skillbuilder.aws/search?searchText=aws-cloud-practitioner-essentials&showRedirectNotFoundBanner=true |
-| 4 | Đăng ký gói AWS Free Tier, thiết lập môi trường AWS CLI và làm quen với các thao tác dòng lệnh cơ bản. | 30/04/2026 | 30/04/2026 | https://aws.amazon.com/vi/free/ |
-| 5 | Tìm hiểu dịch vụ Amazon EC2 gồm Instance Types, AMI, Amazon EBS và các phương thức kết nối SSH. | 30/04/2026 | 02/05/2026 | https://docs.aws.amazon.com/ec2/ |
-| 6 | Thực hành triển khai EC2 Instance, kết nối SSH và cấu hình bổ sung Amazon EBS. | 02/05/2026 | 03/05/2026 | https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html |
+| 2 | Tìm hiểu hệ sinh thái dịch vụ AWS (Compute, Storage, Networking, Database) thông qua hạ tầng trung tâm dữ liệu. | 27/04/2026 | 27/04/2026 | [AWS Cloud Products Overview]( https://aws.amazon.com/vi/products/) |
+| 3 | Nghiên cứu chuyên sâu danh mục các giải pháp AWS dựa trên tài liệu hướng dẫn CloudJourney. | 27/04/2026 | 30/04/2026 | [AWS Cloud Practitioner Essentials ]( https://skillbuilder.aws/search?searchText=aws-cloud-practitioner-essentials&showRedirectNotFoundBanner=true) |
+| 4 | Đăng ký gói AWS Free Tier, thiết lập môi trường AWS CLI và làm quen với các thao tác dòng lệnh cơ bản. | 30/04/2026 | 30/04/2026 | [AWS Free Tier & AWS CLI]( https://aws.amazon.com/vi/free/) |
+| 5 | Tìm hiểu dịch vụ Amazon EC2 gồm Instance Types, AMI, Amazon EBS và các phương thức kết nối SSH. | 30/04/2026 | 02/05/2026 | [Amazon EC2 User Guide]( https://docs.aws.amazon.com/ec2/) |
+| 6 | Thực hành triển khai EC2 Instance, kết nối SSH và cấu hình bổ sung Amazon EBS. | 02/05/2026 | 03/05/2026 | [Thực hành triển khai EC2 và EBS
+](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) |
 
 ### Kết quả đạt được tuần 2:
 
