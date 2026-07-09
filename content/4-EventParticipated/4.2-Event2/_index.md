@@ -4,7 +4,7 @@ date: 2026-01-17
 weight: 3
 chapter: false
 pre: " <b> 4.2. </b> "
----
+--- 
 
 # Reflection Report: "AWS GameDay – Battle of the 8 Teams"
 
