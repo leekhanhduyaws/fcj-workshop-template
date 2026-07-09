@@ -8,7 +8,7 @@ pre: "<b>5.2. </b>"
 
 Trước khi bắt đầu triển khai, bạn cần hoàn thành một số bước chuẩn bị cơ bản.
 
-## Yêu cầu
+## Yêu cầu 
 
 Để thực hiện workshop này, bạn cần chuẩn bị:
 
