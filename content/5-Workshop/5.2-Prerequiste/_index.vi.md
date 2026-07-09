@@ -1,4 +1,4 @@
-<img width="986" height="836" alt="image" src="https://github.com/user-attachments/assets/c190f690-add1-4276-8202-73f85fb68989" />---
+---
 title: "Các bước chuẩn bị"
 date: "2026-07-09"
 weight: 2
