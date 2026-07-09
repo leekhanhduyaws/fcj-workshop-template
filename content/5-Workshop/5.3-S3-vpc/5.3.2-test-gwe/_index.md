@@ -1,95 +1,143 @@
 ---
-title : "Test the Gateway Endpoint"
-date : 2024-01-01 
-weight : 2
-chapter : false
-pre : " <b> 5.3.2 </b> "
+title: "Configure Internet Gateway & Route Tables"
+date: "2026-07-09"
+weight: 2
+chapter: false
+pre: "<b>5.3.2. </b>"
 ---
 
-#### Create S3 bucket
+After creating the VPC and subnets, the next step is to configure the **Internet Gateway**, **Route Table**, and **Security Groups** so that your resources can communicate properly while maintaining network security.
 
-1. Navigate to **S3 management console**
-2. In the Bucket console, choose **Create bucket**
+---
 
-![Create bucket](/images/5-Workshop/5.3-S3-vpc/create-bucket.png)
+# 1. Create an Internet Gateway
 
-3. In **the Create bucket console**
-+ **Name the bucket**: choose a name that hasn't been given to any bucket globally (hint: lab number and your name)
+An **Internet Gateway (IGW)** enables resources in the **Public Subnet** to communicate with the Internet.
 
-![Bucket name](/images/5-Workshop/5.3-S3-vpc/bucket-name.png)
+1. In the **VPC Console**, navigate to **Internet gateways** → **Create internet gateway**.
 
-+ Leave other fields as they are (default)
-+ Scroll down and choose **Create bucket**
+2. Configure the following:
 
-![Create](/images/5-Workshop/5.3-S3-vpc/create-button.png) 
+| Field | Value |
+|-------|--------|
+| Name tag | `flashlearn-igw` |
 
-+ Successfully create S3 bucket.
+3. Click **Create internet gateway**.
 
-![Success](/images/5-Workshop/5.3-S3-vpc/bucket-success.png)
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.3-S3-vpc/5.3.2/5.3.2.1.png" width="900">
+</p>
 
-#### Connect to EC2 with session manager
+4. After the Internet Gateway is created:
 
-+ For this workshop, you will use **AWS Session Manager** to access several **EC2 instances**. **Session Manager** is a fully managed **AWS Systems Manager** capability that allows you to manage your **Amazon EC2 instances**  and on-premises virtual machines (VMs) through an interactive one-click browser-based shell. Session Manager provides secure and auditable instance management without the need to open inbound ports, maintain bastion hosts, or manage SSH keys.
+- Select **flashlearn-igw**
+- Choose **Actions → Attach to VPC**
+- Select **flashlearn-vpc**
+- Click **Attach internet gateway**
 
-+ First Cloud AI Journey [Lab](https://000058.awsstudygroup.com/1-introduce/) for indepth understanding of Session manager.
+---
 
-1. In the **AWS Management Console**, start typing ```Systems Manager``` in the quick search box and press **Enter**:
+# 2. Create a Route Table for the Public Subnet
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm.png)
+A **Route Table** defines how network traffic is routed within the VPC.
 
-2. From the **Systems Manager** menu, find **Node Management** in the left menu and click **Session Manager**:
+1. Navigate to **Route tables** → **Create route table**.
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm1.png)
+2. Configure the following:
 
-3. Click **Start Session**, and select **the EC2 instance** named **Test-Gateway-Endpoint**. 
-{{% notice info %}}
-This EC2 instance is already running in "VPC Cloud" and will be used to test connectivity to Amazon S3 through the Gateway endpoint you just created (s3-gwe). {{% /notice %}}
+| Field | Value |
+|-------|--------|
+| Name | `flashlearn-public-rt` |
+| VPC | `flashlearn-vpc` |
 
-![Start session](/images/5-Workshop/5.3-S3-vpc/start-session.png)
+3. Click **Create route table**.
 
-**Session Manager** will open a new browser tab with a shell prompt: sh-4.2 $
+4. Add a route to the Internet:
 
-![Success](/images/5-Workshop/5.3-S3-vpc/start-session-success.png)
+- Select **flashlearn-public-rt**
+- Open the **Routes** tab
+- Choose **Edit routes**
+- Click **Add route**
 
-You have successfully start a session - connect to the EC2 instance in VPC cloud. In the next step, we will create a S3 bucket and a file in it. 
+| Destination | Target |
+|-------------|--------|
+| `0.0.0.0/0` | `flashlearn-igw` |
 
-#### Create a file and upload to s3 bucket
+5. Click **Save changes**.
 
-1. Change to the ssm-user's home directory by typing ```cd ~``` in the CLI
+6. Associate the Route Table with the Public Subnet:
 
-![Change user's dir](/images/5-Workshop/5.3-S3-vpc/cli1.png)
+- Open the **Subnet associations** tab
+- Choose **Edit subnet associations**
+- Select **flashlearn-public-subnet**
+- Click **Save associations**
 
-2. Create a new file to use for testing with the command ```fallocate -l 1G testfile.xyz```, which will create a file of 1GB size named "testfile.xyz".
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.3-S3-vpc/5.3.2/5.3.2.2.png" width="900">
+</p>
 
-![Create file](/images/5-Workshop/5.3-S3-vpc/cli-file.png)
+---
 
-3. Upload file to S3 bucket with command ```aws s3 cp testfile.xyz s3://your-bucket-name```. Replace your-bucket-name with the name of S3 bucket that you created earlier.
+# 3. Create Security Groups
 
-![Uploaded](/images/5-Workshop/5.3-S3-vpc/uploaded.png)
+## Create a Security Group for EC2
 
-You have successfully uploaded the file to your S3 bucket. You can now terminate the session.
+1. Navigate to **Security Groups** → **Create security group**.
 
-#### Check object in S3 bucket
+2. Configure the following:
 
-1. Navigate to S3 console.  
-2. Click the name of your s3 bucket
-3. In the Bucket console, you will see the file you have uploaded to your S3 bucket
+| Field | Value |
+|-------|--------|
+| Security group name | `flashlearn-ec2-sg` |
+| Description | Security group for FlashLearn EC2 |
+| VPC | `flashlearn-vpc` |
 
-![Check S3](/images/5-Workshop/5.3-S3-vpc/check-s3-bucket.png)
+3. Add the following inbound rules:
 
-#### Section summary
+| Type | Protocol | Port | Source |
+|------|----------|------|--------|
+| HTTP | TCP | 80 | `0.0.0.0/0` |
+| HTTPS | TCP | 443 | `0.0.0.0/0` |
+| Custom TCP | TCP | 5000 | `0.0.0.0/0` |
+| SSH | TCP | 22 | My IP |
 
-Congratulation on completing access to S3 from VPC. In this section, you created a Gateway endpoint for Amazon S3, and used the AWS CLI to upload an object. The upload worked because the Gateway endpoint allowed communication to S3, without needing an Internet Gateway attached to "VPC Cloud". This demonstrates the functionality of the Gateway endpoint as a secure path to S3 without traversing the Public Internet.
+4. Click **Create security group**.
 
+---
 
+## Create a Security Group for Amazon RDS
 
+1. Click **Create security group**.
 
+2. Configure the following:
 
+| Field | Value |
+|-------|--------|
+| Security group name | `flashlearn-rds-sg` |
+| Description | Security group for FlashLearn RDS |
+| VPC | `flashlearn-vpc` |
 
+3. Add the following inbound rule:
 
+| Type | Protocol | Port | Source |
+|------|----------|------|--------|
+| PostgreSQL | TCP | 5432 | `flashlearn-ec2-sg` |
 
+> **Best Practice:** Set the PostgreSQL rule source to the **EC2 Security Group** instead of an IP address. This ensures that only EC2 instances associated with that Security Group can access the database.
 
+4. Click **Create security group**.
 
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.3-S3-vpc/5.3.2/5.3.2.3.png" width="900">
+</p>
 
+---
 
+# Result
 
+After completing this step, you will have:
+
+- An Internet Gateway named `flashlearn-igw` attached to the VPC.
+- A Route Table named `flashlearn-public-rt` that allows the Public Subnet to access the Internet.
+- A Security Group named `flashlearn-ec2-sg` that allows HTTP, HTTPS, SSH, and application traffic.
+- A Security Group named `flashlearn-rds-sg` that allows only the EC2 Security Group to connect to the PostgreSQL database.
