@@ -32,7 +32,7 @@ DB Subnet Group giúp xác định các **Private Subnet** mà Amazon RDS sẽ s
 4. Nhấn **Create**
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/5-Workshop/5.4/5.4.1/5.4.1.1.png" width="900">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.4-S3-onprem/5.4.1/1.png" width="900">
 </p>
 
 ---
@@ -92,7 +92,7 @@ DB Subnet Group giúp xác định các **Private Subnet** mà Amazon RDS sẽ s
 8. Nhấn **Create database** và chờ khoảng **5–10 phút** để RDS được khởi tạo.
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/5-Workshop/5.4/5.4.1/5.4.1.2.png" width="900">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.4-S3-onprem/5.4.1/2.png" width="900">
 </p>
 
 ---
@@ -110,7 +110,7 @@ Sau khi trạng thái của RDS chuyển sang **Available**, lưu lại Endpoint
 - Master username
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/5-Workshop/5.4/5.4.1/5.4.1.3.png" width="900">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.4-S3-onprem/5.4.1/3.png" width="900">
 </p>
 
 ---
