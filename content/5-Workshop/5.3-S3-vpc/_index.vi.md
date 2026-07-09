@@ -1,37 +1,38 @@
 ---
-title: "Thiết lập mạng lưới ảo (VPC)"
-date: 2026-07-09
+title: "Thiết lập mạng riêng ảo (VPC)"
+date: "2026-07-09"
 weight: 3
 chapter: false
 pre: "<b>5.3. </b>"
 ---
 
+**Amazon Virtual Private Cloud (Amazon VPC)** cho phép bạn tạo một mạng riêng ảo trên AWS, giúp triển khai các tài nguyên trong một môi trường được cô lập và bảo mật.
 
-**Amazon Virtual Private Cloud (VPC)** cho phép bạn tạo một mạng riêng ảo trên AWS Cloud, hoàn toàn cô lập với các tài nguyên khác.
+## Kiến trúc mạng
 
-## Kiến trúc mạng sẽ xây dựng
+Trong workshop này, bạn sẽ xây dựng kiến trúc mạng như sau:
 
-```
+```text
 VPC: 10.0.0.0/16 (FlashLearn VPC)
 │
 ├── Public Subnet: 10.0.1.0/24 (ap-southeast-1a)
 │   ├── Internet Gateway
-│   └── EC2 (ASP.NET Core App)
+│   └── EC2 (ASP.NET Core Application)
 │
 └── Private Subnet: 10.0.2.0/24 (ap-southeast-1a)
-    └── RDS PostgreSQL
+    └── Amazon RDS for PostgreSQL
 ```
 
-### Tại sao cần phân chia Public/Private Subnet?
+## Tại sao cần tách Public Subnet và Private Subnet?
 
-|                      | Public Subnet    | Private Subnet |
-| -------------------- | ---------------- | -------------- |
-| **Kết nối Internet** | Có               | Không          |
-| **Đặt gì ở đây**     | EC2 (Web Server) | RDS (Database) |
-| **Bảo mật**          | Trung bình       | Cao            |
+| Tiêu chí | Public Subnet | Private Subnet |
+| -------- | ------------- | -------------- |
+| **Kết nối Internet** | Có | Không |
+| **Tài nguyên triển khai** | EC2 (Web Server) | Amazon RDS (Database) |
+| **Mức độ bảo mật** | Trung bình | Cao |
 
->  **Best Practice**: Database không nên tiếp xúc trực tiếp với Internet. Đặt RDS trong Private Subnet giúp cô lập hoàn toàn, chỉ EC2 mới có thể kết nối vào.
+> **Best Practice:** Không nên cho phép cơ sở dữ liệu truy cập trực tiếp từ Internet. Đặt Amazon RDS trong **Private Subnet** giúp cô lập hoàn toàn cơ sở dữ liệu, chỉ các EC2 instance trong VPC mới có thể kết nối đến.
 
-## Nội dung
+## Nội dung thực hiện
 
 {{% children showhidden="false" /%}}
