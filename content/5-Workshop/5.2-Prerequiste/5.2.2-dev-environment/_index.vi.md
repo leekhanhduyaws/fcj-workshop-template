@@ -1,6 +1,6 @@
 ---
-title: "Cài đặt môi trường"
-date: 2026-07-09
+title: "Cài đặt môi trường phát triển"
+date: "2026-07-09"
 weight: 2
 chapter: false
 pre: "<b>5.2.2. </b>"
