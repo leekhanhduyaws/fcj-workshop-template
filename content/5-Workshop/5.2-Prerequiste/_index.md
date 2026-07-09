@@ -6,18 +6,17 @@ chapter: false
 pre: "<b>5.2. </b>"
 ---
 
-
-Before starting the deployment, you need to complete some basic preparation steps.
+Before you begin the deployment process, make sure you have completed the following prerequisites.
 
 ## Requirements
 
-To complete this workshop, you will need:
+To follow this workshop, you should have:
 
--  An AWS account (Free Tier eligible)
--  A personal computer with Internet access
--  FlashLearn source code (already available)
--  Basic knowledge of Linux CLI and .NET
+- An AWS account (the Free Tier is sufficient)
+- A personal computer with a stable Internet connection
+- The FlashLearn source code (provided)
+- Basic knowledge of the Linux command-line interface (CLI) and .NET
 
-## Preparation Steps
+## Preparation Tasks
 
-{{% children showhidden="false" /%}}
+{{% children showhidden="false" %}}
