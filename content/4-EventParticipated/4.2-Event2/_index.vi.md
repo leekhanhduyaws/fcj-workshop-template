@@ -3,7 +3,7 @@ title: "Event 2"
 date: 2026-01-17
 weight: 3
 chapter: false
-pre: " <b> 4.3. </b> "
+pre: " <b> 4.2. </b> "
 ---
 
 # Bài thu hoạch "AWS GameDay - 8 Đội Tranh Hùng"
