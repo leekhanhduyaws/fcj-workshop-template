@@ -72,7 +72,9 @@ Sau khi đăng ký, **bắt buộc bật MFA** cho tài khoản root để bảo
 
 > **Zero spend budget** sẽ gửi email ngay khi bất kỳ dịch vụ nào phát sinh chi phí (kể cả **$0.01**), giúp bạn phát hiện kịp thời.
 
-![Cấu hình Budget](/images/5-Workshop/5.2-Prerequisite/budget.png)
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.2-Prerequisite/budget.png" width="700">
+</p>
 
 ---
 
