@@ -32,16 +32,16 @@ graph TB
         end
     end
     
-    Internet([Internet]) -.->|❌ No Direct Access| RDS
+    Internet([Internet]) -.->| No Direct Access| RDS
     
     style RDS fill:#C925D1,stroke:#6B1770,stroke-width:3px
     style PrivateSubnet fill:#F5A623,stroke:#C77E1B,stroke-width:2px
 ```
 
 **Lợi ích của Private Subnet:**
-- ✅ Database không thể truy cập trực tiếp từ Internet
-- ✅ Chỉ EC2 Backend mới kết nối được
-- ✅ Giảm thiểu nguy cơ tấn công
+- Database không thể truy cập trực tiếp từ Internet
+- Chỉ EC2 Backend mới kết nối được
+- Giảm thiểu nguy cơ tấn công
 
 ---
 
@@ -80,7 +80,7 @@ graph TB
    - `flashcard-subnet-private1-ap-southeast-1a` (10.0.101.0/24)
    - `flashcard-subnet-private2-ap-southeast-1b` (10.0.102.0/24)
 
-⚠️ **Lưu ý:** Chọn Private Subnet, KHÔNG phải Public Subnet!
+**Lưu ý:** Chọn Private Subnet, KHÔNG phải Public Subnet!
 
 3. Click **Create**
 
@@ -121,7 +121,7 @@ graph TB
 - Chọn: **Free tier** (nếu tài khoản đủ điều kiện)
 - Hoặc: **Dev/Test** (nếu hết Free Tier)
 
-⚠️ **Lưu ý:** Free Tier chỉ áp dụng cho tài khoản mới trong 12 tháng đầu.
+**Lưu ý:** Free Tier chỉ áp dụng cho tài khoản mới trong 12 tháng đầu.
 
 ---
 
@@ -143,7 +143,7 @@ graph TB
 FlashCard2024!SecureDB
 ```
 
-⚠️ **Quan trọng:** Lưu mật khẩu này vào nơi an toàn! Bạn sẽ cần nó để kết nối database.
+**Quan trọng:** Lưu mật khẩu này vào nơi an toàn! Bạn sẽ cần nó để kết nối database.
 
 ---
 
@@ -219,22 +219,22 @@ FlashCard2024!SecureDB
 | **DB parameter group** | default.postgres15 |
 | **Option group** | default:postgres-15 |
 
-⚠️ **Quan trọng:** Nhập **Initial database name** là `flashcard_db`. Nếu bỏ trống, RDS sẽ không tạo database mặc định!
+ **Quan trọng:** Nhập **Initial database name** là `flashcard_db`. Nếu bỏ trống, RDS sẽ không tạo database mặc định!
 
 **Backup:**
-- ✅ Enable automated backups
+- Enable automated backups
 - Backup retention period: **7 days** (Free Tier)
 - Backup window: **No preference**
 
 **Encryption:**
-- ✅ Enable encryption (khuyến nghị)
+- Enable encryption (khuyến nghị)
 
 **Monitoring:**
-- ✅ Enable Enhanced Monitoring (optional, phát sinh phí nhỏ)
+- Enable Enhanced Monitoring (optional, phát sinh phí nhỏ)
 - Granularity: 60 seconds
 
 **Maintenance:**
-- ✅ Enable auto minor version upgrade
+- Enable auto minor version upgrade
 - Maintenance window: **No preference**
 
 ---
@@ -270,7 +270,7 @@ Port: 5432
 ![RDS Endpoint](../images/rds-endpoint.png)
 **[TODO: Chụp screenshot Endpoint]**
 
-⚠️ **Lưu Endpoint này! Sẽ dùng để kết nối từ EC2 Backend.**
+**Lưu Endpoint này! Sẽ dùng để kết nối từ EC2 Backend.**
 
 ---
 
@@ -317,11 +317,11 @@ pm2 logs flashcard-backend
 
 **Kết quả mong đợi:**
 ```
-✅ Database connected successfully!
+ Database connected successfully!
 Server is running on port 5000
 ```
 
-🎉 **Backend đã kết nối thành công với RDS!**
+**Backend đã kết nối thành công với RDS!**
 
 ---
 
@@ -502,18 +502,18 @@ psql -h <RDS-ENDPOINT> -U postgres -d flashcard_db
 
 ## Checklist
 
-- [ ] ✅ Đã tạo DB Subnet Group với 2 Private Subnets
-- [ ] ✅ RDS instance đã được tạo với engine PostgreSQL
-- [ ] ✅ Public access: No (Private only)
-- [ ] ✅ Security Group: flashcard-db-sg
-- [ ] ✅ Initial database name: flashcard_db
-- [ ] ✅ RDS status: Available
-- [ ] ✅ Đã lưu Endpoint và Password
-- [ ] ✅ Backend .env đã cập nhật DB_HOST
-- [ ] ✅ Backend restart thành công và kết nối DB
-- [ ] ✅ Đã chạy migration (tạo tables)
-- [ ] ✅ Đã chạy seed (nạp dữ liệu mẫu)
-- [ ] ✅ Test API trả về data từ database
+- [ ] Đã tạo DB Subnet Group với 2 Private Subnets
+- [ ] RDS instance đã được tạo với engine PostgreSQL
+- [ ] Public access: No (Private only)
+- [ ] Security Group: flashcard-db-sg
+- [ ] Initial database name: flashcard_db
+- [ ] RDS status: Available
+- [ ] Đã lưu Endpoint và Password
+- [ ] Backend .env đã cập nhật DB_HOST
+- [ ] Backend restart thành công và kết nối DB
+- [ ] Đã chạy migration (tạo tables)
+- [ ] Đã chạy seed (nạp dữ liệu mẫu)
+- [ ] Test API trả về data từ database
 
 ---
 
@@ -530,4 +530,4 @@ psql -h <RDS-ENDPOINT> -U postgres -d flashcard_db
 
 ## Tiếp theo
 
-Database đã sẵn sàng! Bây giờ chuyển sang [Phần 6: Hosting Frontend & API Gateway](../5.6-amplify-apigateway/) để đưa giao diện web lên AWS Amplify! 🎨
+Database đã sẵn sàng! Bây giờ chuyển sang [Phần 6: Hosting Frontend & API Gateway](../5.6-amplify-apigateway/) để đưa giao diện web lên AWS Amplify! 
