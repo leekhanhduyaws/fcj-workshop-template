@@ -6,82 +6,86 @@ chapter: false
 pre: "<b>5.2.1. </b>"
 ---
 
+To complete this workshop, you need an AWS account. If you do not already have one, follow the instructions below.
 
-To complete this workshop, you need an AWS account. If you don't have one yet, follow the steps below.
+## 1. Create an AWS Account
 
-## 1. Register an AWS Account
+1. Visit https://aws.amazon.com and choose **Create an AWS Account**.
 
-1. Go to **[https://aws.amazon.com](https://aws.amazon.com)** and click **Create an AWS Account**
+2. Complete the registration form:
 
-![AWS Homepage](/images/5-Workshop/5.2-prerequisite/5.2.1/aws-homepage.png)
+   - **Email address**: Enter your email address.
+   - **AWS account name**: Choose an account name (for example, `flashlearn-workshop`).
 
-2. Fill in the registration details:
-   - **Email address**: Your email address
-   - **AWS account name**: Account name (e.g., `flashlearn-workshop`)
+3. Select the **Free Tier** plan when prompted to choose an account type.
 
-3. Select the **Free Tier** plan when asked about account type
+4. Enter your payment information. AWS may temporarily charge **$1** to verify your payment method. This amount will be refunded shortly afterward.
 
-4. Enter credit card information (AWS will charge $1 for verification, which is immediately refunded)
+5. Complete the phone verification process.
 
-5. Verify your identity via phone number
-
-6. Select **Basic support plan** (free)
+6. Select the **Basic Support Plan** (Free).
 
 ---
 
-## 2. Enable Security (MFA)
+## 2. Enable Multi-Factor Authentication (MFA)
 
-After registering, **enabling MFA** on the root account is mandatory to protect your account:
+After creating your account, you should enable **Multi-Factor Authentication (MFA)** for the root user to improve account security.
 
-1. Log in to the **AWS Console**
-2. Click on your account name (top right) → **Security credentials**
-3. Under **Multi-factor authentication (MFA)** → **Assign MFA device**
-4. Select **Authenticator app** and follow the instructions
+1. Sign in to the **AWS Management Console**.
 
-![MFA Setup](/images/5-Workshop/5.2-prerequisite/5.2.1/mfa-setup.png)
+2. Click your account name in the upper-right corner, then select **Security credentials**.
+
+3. Under **Multi-factor authentication (MFA)**, choose **Assign MFA device**.
+
+4. Select **Authenticator app** and follow the on-screen instructions.
 
 ---
 
 ## 3. Create an IAM User for the Workshop
 
->  **Do not** use the root account for day-to-day tasks. Create an IAM User with appropriate permissions.
+> It is not recommended to use the root account for daily tasks. Instead, create an IAM user with the appropriate permissions.
 
-1. Search for **IAM** in the search bar → **Users** → **Create user**
+1. Search for **IAM** in the AWS Management Console, then navigate to **Users** → **Create user**.
 
-2. Configure the user:
+2. Configure the new user:
+
    - **User name**: `flashlearn-admin`
-   - Check **Provide user access to the AWS Management Console**
-   - Select **I want to create an IAM user**
-   - **Console password**: Set a strong password
+   - Enable **Provide user access to the AWS Management Console**.
+   - Select **I want to create an IAM user**.
+   - Set a **Console password**.
 
-3. Attach permissions → **Attach policies directly** → search and select **AdministratorAccess**
+3. Grant permissions by selecting **Attach policies directly**, then search for and choose **AdministratorAccess**.
 
-![Create IAM User](/images/5-Workshop/5.2-prerequisite/5.2.1/iam-create-user.png)
-
-4. Click **Create user** and save the login credentials
+4. Choose **Create user** and save the sign-in credentials in a secure location.
 
 ---
 
-## 4. Set Up AWS Budget Alert
+## 4. Configure an AWS Budget
 
-To avoid unexpected charges, configure a budget alert:
+To avoid unexpected charges, create an AWS Budget to monitor your spending.
 
-1. Search for **Billing and Cost Management** → **Budgets** → **Create budget**
+1. Navigate to **Billing and Cost Management** → **Budgets** → **Create budget**.
 
-2. Select **Use a template** → **Zero spend budget**
+2. Select **Use a template** → **Zero spend budget**.
 
-3. Enter your alert email → **Create budget**
+3. Enter your email address for notifications, then choose **Create budget**.
 
->  **Zero spend budget** sends an email as soon as any service incurs a charge (even $0.01), helping you detect issues promptly.
+> The **Zero spend budget** sends an email notification whenever any AWS service incurs a charge, even as little as **$0.01**, helping you detect unexpected costs as early as possible.
 
-![Budget Setup](/images/5-Workshop/5.2-prerequisite/5.2.1/budget-setup.png)
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.2-Prerequisite/budget.png" width="700">
+</p>
+
+<p align="center">
+  <em>Figure 1. Configuring an AWS Zero Spend Budget.</em>
+</p>
 
 ---
 
 ## Result
 
-After this step, you will have:
--  An AWS account with MFA enabled
--  IAM User `flashlearn-admin` with Administrator permissions
--  A $0 budget alert to protect against unexpected costs
+After completing this section, you will have:
 
+- An AWS account with **Multi-Factor Authentication (MFA)** enabled.
+- An IAM user named `flashlearn-admin` with **AdministratorAccess** permissions.
+- An AWS **Zero Spend Budget** configured to help monitor and control costs.
