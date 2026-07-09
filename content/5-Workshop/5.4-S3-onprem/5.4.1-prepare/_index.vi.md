@@ -1,58 +1,125 @@
 ---
-title : "Chuẩn bị tài nguyên"
-date : 2024-01-01
-weight : 1
-chapter : false
-pre : " <b> 5.4.1 </b> "
+title: "Tạo RDS PostgreSQL"
+date: "2026-07-09"
+weight: 1
+chapter: false
+pre: "<b>5.4.1. </b>"
 ---
 
-Để chuẩn bị cho phần này của workshop, bạn sẽ cần phải:
-+ Triển khai CloudFormation stack
-+ Sửa đổi bảng định tuyến VPC.
+Trong bước này, bạn sẽ tạo **Amazon RDS for PostgreSQL** để lưu trữ dữ liệu cho ứng dụng FlashLearn. Trước tiên cần tạo **DB Subnet Group**, sau đó khởi tạo **RDS Instance** và lưu lại thông tin kết nối.
 
-Các thành phần này hoạt động cùng nhau để mô phỏng DNS forwarding và name resolution.
+---
 
-#### Triển khai CloudFormation stack
+# 1. Tạo DB Subnet Group
 
-Mẫu CloudFormation sẽ tạo các dịch vụ bổ sung để hỗ trợ mô phỏng môi trường truyền thống:
-+ Một Route 53 Private Hosted Zone lưu trữ các bản ghi Bí danh (Alias records) cho điểm cuối PrivateLink S3
-+ Một Route 53 Inbound Resolver endpoint cho phép "VPC Cloud" giải quyết các yêu cầu resolve DNS gửi đến Private Hosted Zone
-+ Một Route 53 Outbound Resolver endpoint cho phép "VPC On-prem" chuyển tiếp các yêu cầu DNS cho S3 sang "VPC Cloud"
+DB Subnet Group giúp xác định các **Private Subnet** mà Amazon RDS sẽ sử dụng.
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
+1. Truy cập **Amazon RDS Console** → **Subnet groups** → **Create DB subnet group**
 
-1. Click link sau để mở [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). Mẫu yêu cầu sẽ được tải sẵn vào menu. Chấp nhận tất cả mặc định và nhấp vào Tạo stack.
+2. Cấu hình:
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+| Trường | Giá trị |
+|--------|----------|
+| Name | `flashlearn-db-subnet-group` |
+| Description | Subnet group for FlashLearn RDS |
+| VPC | `flashlearn-vpc` |
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+3. Trong phần **Add subnets**, thêm cả hai Private Subnet:
 
-Có thể mất vài phút để triển khai stack hoàn tất. Bạn có thể tiếp tục với bước tiếp theo mà không cần đợi quá trình triển khai kết thúc.
+- **ap-southeast-1a** → `flashlearn-private-subnet-1 (10.0.2.0/24)`
+- **ap-southeast-1b** → `flashlearn-private-subnet-2 (10.0.3.0/24)`
 
-####  Cập nhật bảng định tuyến private on-premise 
+4. Nhấn **Create**
 
-Workshop này sử dụng StrongSwan VPN chạy trên EC2 instance để mô phỏng khả năng kết nối giữa trung tâm dữ liệu truyền thống và môi trường cloud AWS. Hầu hết các thành phần bắt buộc đều được cung cấp trước khi bạn bắt đầu. Để hoàn tất cấu hình VPN, bạn sẽ sửa đổi bảng định tuyến "VPC on-prem" để hướng lưu lượng đến cloud đi qua StrongSwan VPN instance.
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.4/5.4.1/5.4.1.1.png" width="900">
+</p>
 
-1. Mở Amazon EC2 console 
+---
 
-2. Chọn instance tên infra-vpngw-test. Từ Details tab, copy Instance ID và paste vào text editor của bạn để sử dụng ở những bước tiếp theo
+# 2. Tạo Amazon RDS PostgreSQL
 
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
+1. Chọn **Databases** → **Create database**
 
-3. Đi đến VPC menu bằng cách gõ "VPC" vào Search box
+2. Trong phần **Engine options**:
 
-4. Click vào Route Tables, chọn RT Private On-prem route table, chọn Routes tab, và click Edit Routes.
+- Engine type: **PostgreSQL**
+- Engine version: **PostgreSQL 16.x**
 
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
+3. Trong **Templates**, chọn:
 
-5. Click Add route.
-+ Destination: CIDR block của Cloud VPC
-+ Target: ID của infra-vpngw-test instance (bạn đã lưu lại ở bước trên)
+- **Free tier** (nếu tài khoản còn Free Tier)
+- Hoặc **Dev/Test**
 
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
+4. Thiết lập thông tin cơ sở dữ liệu:
 
-6. Click Save changes
+| Trường | Giá trị |
+|--------|----------|
+| DB instance identifier | `flashlearn-db` |
+| Master username | `flashlearn_admin` |
+| Master password | Đặt mật khẩu mạnh |
+| Confirm password | Nhập lại mật khẩu |
 
+5. Cấu hình Instance:
 
+| Trường | Giá trị |
+|--------|----------|
+| DB instance class | `db.t3.micro` |
+| Storage type | `gp2` |
+| Allocated storage | `20 GB` |
+| Storage autoscaling | Tắt |
 
+6. Cấu hình kết nối:
 
+| Trường | Giá trị |
+|--------|----------|
+| VPC | `flashlearn-vpc` |
+| DB subnet group | `flashlearn-db-subnet-group` |
+| Public access | **No** |
+| VPC security group | `flashlearn-rds-sg` |
+| Availability Zone | `ap-southeast-1a` |
+
+> **Lưu ý:** Bắt buộc chọn **Public access = No** để cơ sở dữ liệu không thể truy cập trực tiếp từ Internet.
+
+7. Cấu hình bổ sung:
+
+| Trường | Giá trị |
+|--------|----------|
+| Initial database name | `flashlearn` |
+| Backup retention period | `7 days` |
+| Encryption | Enable |
+
+8. Nhấn **Create database** và chờ khoảng **5–10 phút** để RDS được khởi tạo.
+
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.4/5.4.1/5.4.1.2.png" width="900">
+</p>
+
+---
+
+# 3. Lưu lại thông tin kết nối
+
+Sau khi trạng thái của RDS chuyển sang **Available**, lưu lại Endpoint để sử dụng trong các bước triển khai ứng dụng.
+
+1. Chọn database **flashlearn-db**
+2. Mở tab **Connectivity & security**
+3. Sao chép các thông tin sau:
+
+- Endpoint
+- Port: `5432`
+- Master username
+
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.4/5.4.1/5.4.1.3.png" width="900">
+</p>
+
+---
+
+# Kết quả
+
+Sau khi hoàn thành bước này, bạn đã có:
+
+- DB Subnet Group được tạo trên hai Private Subnet.
+- Amazon RDS PostgreSQL ở trạng thái **Available**.
+- Amazon RDS chỉ cho phép kết nối từ EC2 thông qua Security Group.
+- Đã lưu lại thông tin kết nối gồm **Endpoint**, **Username** và **Password** để sử dụng ở các bước tiếp theo.
