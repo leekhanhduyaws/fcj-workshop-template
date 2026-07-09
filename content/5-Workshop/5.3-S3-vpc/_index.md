@@ -8,7 +8,7 @@ pre: "<b>5.3. </b>"
 
 
 **Amazon Virtual Private Cloud (VPC)** allows you to create an isolated virtual network on AWS Cloud, completely separated from other resources.
-
+ 
 ## Network Architecture to Build
 
 ```
