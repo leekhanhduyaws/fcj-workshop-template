@@ -1,6 +1,6 @@
 ---
 title: "Set Up Development Environment"
-date: 2026-07-09
+date: 2026-07-09 
 weight: 2
 chapter: false
 pre: "<b>5.2.2. </b>"
