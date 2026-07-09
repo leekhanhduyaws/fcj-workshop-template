@@ -8,95 +8,104 @@ pre: "<b>5.1. </b>"
 
 ## What is FlashLearn?
 
-**FlashLearn** is an intelligent English learning web application built with **ASP.NET Core 8.0**. It enables users to:
+**FlashLearn** is an English vocabulary learning web application built with **ASP.NET Core 8.0**. It helps users learn and review vocabulary using **Flashcards** combined with the **Spaced Repetition** learning technique.
 
-- Create **flashcard decks** with English–Vietnamese vocabulary
-- Practice vocabulary using the **Spaced Repetition** learning method
-- Attach **images** to each flashcard
-- Compete with other users in **real-time vocabulary battles** powered by SignalR
-- Track learning progress and maintain a daily learning **streak**
+The application provides the following features:
 
-The application currently uses **SQLite** in the local development environment. In this workshop, you will migrate the entire application to **AWS Cloud** and replace SQLite with a fully managed **Amazon RDS for PostgreSQL** database.
+- **Create and manage Flashcard Decks**
+- **Review vocabulary using the Spaced Repetition algorithm**
+- **Attach images to Flashcards**
+- **Real-time Battle Mode powered by SignalR**
+- **Track learning progress and daily streaks**
+
+The current version uses **SQLite** as the local development database. In this workshop, you will deploy the entire application to **Amazon Web Services (AWS)** and migrate the database to **Amazon RDS for PostgreSQL**.
 
 ---
 
 ## System Architecture
 
-The application follows a **3-Tier Architecture** deployed inside a **Virtual Private Cloud (VPC)** with properly separated public and private subnets.
+The application is deployed using a **Three-Tier Architecture** within an **Amazon Virtual Private Cloud (Amazon VPC)**. Public and Private Subnets are separated to enhance security and follow AWS best practices.
 
-![FlashLearn AWS Architecture](/images/5-Workshop/architecture-overview.png)
+<p align="center">
+  <img src="/fcj-workshop-template/images/5-Workshop/5.1-Workshop-overview/aws_whiteboard.png" width="700">
+</p>
 
-### Architecture Components
+<p align="center">
+  <em>Figure 1. FlashLearn deployment architecture on AWS.</em>
+</p>
+
+### Main Components
 
 | Layer | Component | AWS Service |
-| ------ | --------- | ----------- |
+|-------|-----------|-------------|
 | **Presentation** | Web UI, SignalR | Amazon EC2 (Public Subnet) |
-| **Authentication** | User Sign Up / Sign In | Amazon Cognito |
+| **Authentication** | User Authentication | Amazon Cognito |
 | **Business Logic** | ASP.NET Core Controllers | Amazon EC2 (Public Subnet) |
 | **Database** | User and Flashcard Data | Amazon RDS for PostgreSQL (Private Subnet) |
 | **Storage** | Flashcard Images | Amazon S3 |
+
+---
 
 ### Application Workflow
 
 ```text
 User
-  │
-  ├─► [1] Amazon Cognito
-  │         │
-  │         └─ Authenticate user and return a JWT token
-  │
-  ├─► [2] Amazon EC2 (ASP.NET Core 8.0)
-  │         │
-  │         ├─► Amazon RDS for PostgreSQL
-  │         │      Read and write application data
-  │         │
-  │         └─► Amazon S3
-  │                Upload and download flashcard images
-  │
-  └─► [3] SignalR Hub
-            Real-time multiplayer vocabulary battles
+ │
+ ├──► Amazon Cognito
+ │      └── Authenticate user and issue JWT Token
+ │
+ ├──► Amazon EC2 (ASP.NET Core 8.0)
+ │      │
+ │      ├──► Amazon RDS for PostgreSQL
+ │      │        Read and write application data
+ │      │
+ │      └──► Amazon S3
+ │               Upload and download Flashcard images
+ │
+ └──► SignalR Hub
+         Real-time Battle Mode
 ```
 
 ---
 
 ## Workshop Objectives
 
-After completing this workshop, you will be able to:
+By the end of this workshop, you will be able to:
 
-- Configure a secure **Amazon VPC** with public and private subnets
-- Deploy an **ASP.NET Core 8.0** application on Amazon EC2
-- Migrate the database from **SQLite** to **Amazon RDS for PostgreSQL**
-- Store user-uploaded media in **Amazon S3**
-- Implement user authentication using **Amazon Cognito**
-- Clean up AWS resources to prevent unnecessary charges
+- Configure an Amazon VPC with Public and Private Subnets.
+- Deploy an ASP.NET Core 8.0 application on Amazon EC2.
+- Migrate data from SQLite to Amazon RDS for PostgreSQL.
+- Store and manage images using Amazon S3.
+- Integrate Amazon Cognito for user authentication.
+- Clean up AWS resources to prevent unnecessary charges.
 
 ---
 
 ## Estimated Duration
 
-| Step | Task | Estimated Time |
-| ---- | ---- | -------------- |
-| 5.2 | Environment Setup | ~30 minutes |
-| 5.3 | Configure Amazon VPC | ~20 minutes |
-| 5.4 | Deploy Amazon RDS | ~25 minutes |
-| 5.5 | Deploy EC2 and Application | ~45 minutes |
-| 5.6 | Configure Amazon S3 | ~20 minutes |
-| 5.7 | Integrate Amazon Cognito | ~30 minutes |
-| 5.8 | Resource Cleanup | ~15 minutes |
+| Step | Activity | Estimated Time |
+|------|----------|----------------|
+| **5.2** | Prepare the environment | ~30 minutes |
+| **5.3** | Configure Amazon VPC | ~20 minutes |
+| **5.4** | Deploy Amazon RDS | ~25 minutes |
+| **5.5** | Deploy Amazon EC2 and ASP.NET Core application | ~45 minutes |
+| **5.6** | Configure Amazon S3 | ~20 minutes |
+| **5.7** | Integrate Amazon Cognito | ~30 minutes |
+| **5.8** | Clean up resources | ~15 minutes |
 | **Total** | | **~3 hours** |
 
 ---
 
 ## Estimated Cost
 
-> **AWS Free Tier** includes many of the services used in this workshop for new AWS accounts during the first 12 months. If your account is no longer eligible for the Free Tier, the estimated monthly cost is:
+> **AWS Free Tier** allows most new AWS accounts to complete this workshop at no additional cost. If your account is no longer eligible for the Free Tier, the estimated monthly cost is as follows:
 
 | AWS Service | Configuration | Estimated Monthly Cost |
-| ------------ | ------------- | ---------------------- |
-| Amazon EC2 | t3.micro (1 On-Demand instance) | ~$8.47 |
-| Amazon RDS | db.t3.micro PostgreSQL (Single-AZ) | ~$15.33 |
+|-------------|---------------|------------------------|
+| Amazon EC2 (t3.micro) | 1 On-Demand Instance | ~$8.47 |
+| Amazon RDS (db.t3.micro) | PostgreSQL, Single-AZ | ~$15.33 |
 | Amazon S3 | 5 GB Standard Storage | ~$0.12 |
 | Amazon Cognito | Fewer than 50,000 Monthly Active Users | $0.00 |
 | **Total** | | **~$24/month** |
 
-> **Important:** Complete **Step 5.8 – Resource Cleanup** immediately after finishing the workshop to avoid unexpected AWS charges.
+> **Note:** After completing the workshop, be sure to follow **Step 5.8 – Clean Up Resources** to delete all AWS resources created during the workshop and avoid unexpected charges.
