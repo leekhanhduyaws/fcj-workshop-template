@@ -19,7 +19,7 @@ pre: "<b>5.1. </b>"
 
 Ứng dụng hiện chạy với **SQLite** trên môi trường local. Workshop này sẽ hướng dẫn bạn chuyển toàn bộ hệ thống lên **AWS Cloud** với cơ sở dữ liệu **PostgreSQL** được quản lý hoàn toàn bởi AWS.
 
----
+--- 
 
 ## Kiến trúc hệ thống
 
