@@ -6,93 +6,100 @@ chapter: false
 pre: "<b>5.1. </b>"
 ---
 
-
 ## FlashLearn là gì?
 
-**FlashLearn** là ứng dụng web học tiếng Anh thông minh được xây dựng bằng **ASP.NET Core 8.0**, cho phép người dùng:
+**FlashLearn** là ứng dụng web học tiếng Anh được phát triển bằng **ASP.NET Core 8.0**, giúp người dùng học từ vựng thông qua hệ thống **Flashcard** kết hợp thuật toán **Spaced Repetition**.
 
--  **Tạo bộ Flashcard** (Deck) với từ vựng tiếng Anh — tiếng Việt
--  **Luyện tập** theo hệ thống lặp lại ngắt quãng (Spaced Repetition)
--  **Đính kèm hình ảnh** minh họa cho từng flashcard
--  **Thi đấu** từ vựng với người chơi khác theo thời gian thực (SignalR)
--  **Theo dõi tiến độ** và chuỗi ngày học liên tục (Streak)
+Ứng dụng cung cấp các tính năng:
 
-Ứng dụng hiện chạy với **SQLite** trên môi trường local. Workshop này sẽ hướng dẫn bạn chuyển toàn bộ hệ thống lên **AWS Cloud** với cơ sở dữ liệu **PostgreSQL** được quản lý hoàn toàn bởi AWS.
+- **Tạo và quản lý Flashcard Decks**
+- **Ôn tập theo thuật toán Spaced Repetition**
+- **Đính kèm hình ảnh cho Flashcard**
+- **Battle Mode thời gian thực bằng SignalR**
+- **Theo dõi Streak và tiến độ học tập**
 
---- 
+Phiên bản hiện tại sử dụng **SQLite** trong môi trường phát triển. Trong workshop này, bạn sẽ triển khai toàn bộ hệ thống lên **Amazon Web Services (AWS)** và chuyển cơ sở dữ liệu sang **Amazon RDS for PostgreSQL**.
+
+---
 
 ## Kiến trúc hệ thống
 
-Hệ thống được thiết kế theo mô hình **3 lớp (3-Tier Architecture)** đặt trong một **Virtual Private Cloud (VPC)** có phân chia subnet rõ ràng:
+Ứng dụng được triển khai theo mô hình **Three-Tier Architecture** trong một **Amazon Virtual Private Cloud (Amazon VPC)** với Public Subnet và Private Subnet được tách biệt nhằm tăng cường bảo mật.
 
 ![Kiến trúc FlashLearn AWS](/images/5-Workshop/architecture-overview.png)
 
 ### Các thành phần chính
 
-| Lớp                | Thành phần                    | Dịch vụ AWS                            |
-| ------------------ | ----------------------------- | -------------------------------------- |
-| **Presentation**   | Giao diện web, SignalR        | EC2 (Public Subnet)                    |
-| **Authentication** | Đăng ký / Đăng nhập           | Amazon Cognito                         |
-| **Business Logic** | ASP.NET Core Controllers      | EC2 (Public Subnet)                    |
-| **Database**       | Dữ liệu người dùng, flashcard | Amazon RDS PostgreSQL (Private Subnet) |
-| **Storage**        | Ảnh flashcard                 | Amazon S3                              |
+| Layer | Thành phần | Dịch vụ AWS |
+|-------|------------|-------------|
+| **Presentation** | Web UI, SignalR | Amazon EC2 (Public Subnet) |
+| **Authentication** | User Authentication | Amazon Cognito |
+| **Business Logic** | ASP.NET Core Controllers | Amazon EC2 (Public Subnet) |
+| **Database** | User & Flashcard Data | Amazon RDS for PostgreSQL (Private Subnet) |
+| **Storage** | Flashcard Images | Amazon S3 |
+
+---
 
 ### Luồng hoạt động
 
-```
-Người dùng
-    │
-    ├─[1]─► Amazon Cognito ──► Xác thực, trả JWT Token
-    │
-    ├─[2]─► EC2 (ASP.NET Core) ──► Xử lý request với JWT
-    │              │
-    │              ├─► RDS PostgreSQL ──► Đọc/ghi dữ liệu flashcard
-    │              │
-    │              └─► Amazon S3 ──► Upload/Download ảnh
-    │
-    └─[3]─► SignalR Hub ──► Battle mode real-time
+```text
+User
+ │
+ ├──► Amazon Cognito
+ │      └── Authenticate user and issue JWT Token
+ │
+ ├──► Amazon EC2 (ASP.NET Core 8.0)
+ │      │
+ │      ├──► Amazon RDS for PostgreSQL
+ │      │        Read/Write application data
+ │      │
+ │      └──► Amazon S3
+ │               Upload/Download Flashcard images
+ │
+ └──► SignalR Hub
+         Real-time Battle Mode
 ```
 
 ---
 
 ## Mục tiêu workshop
 
-Sau khi hoàn thành workshop, bạn sẽ:
+Sau khi hoàn thành workshop, bạn sẽ có thể:
 
-Nắm được cách thiết lập mạng lưới ảo (VPC) với các lớp bảo mật  
-Triển khai ứng dụng ASP.NET Core 8.0 lên EC2  
-Chuyển đổi database từ SQLite sang RDS PostgreSQL  
-Lưu trữ media người dùng trên Amazon S3  
-Tích hợp xác thực người dùng với Amazon Cognito  
-Biết cách dọn dẹp tài nguyên để tránh phát sinh chi phí  
+- Thiết lập Amazon VPC với Public và Private Subnets.
+- Triển khai ứng dụng ASP.NET Core 8.0 lên Amazon EC2.
+- Di chuyển dữ liệu từ SQLite sang Amazon RDS for PostgreSQL.
+- Lưu trữ hình ảnh bằng Amazon S3.
+- Tích hợp xác thực người dùng với Amazon Cognito.
+- Dọn dẹp tài nguyên AWS để tránh phát sinh chi phí không cần thiết.
 
 ---
 
 ## Thời gian thực hiện
 
-| Bước     | Nội dung             | Thời gian ước tính |
-| -------- | -------------------- | ------------------ |
-| 5.2      | Chuẩn bị môi trường  | ~30 phút           |
-| 5.3      | Thiết lập VPC        | ~20 phút           |
-| 5.4      | Triển khai RDS       | ~25 phút           |
-| 5.5      | Triển khai EC2 + App | ~45 phút           |
-| 5.6      | Cấu hình S3          | ~20 phút           |
-| 5.7      | Tích hợp Cognito     | ~30 phút           |
-| 5.8      | Dọn dẹp              | ~15 phút           |
-| **Tổng** |                      | **~3 giờ**         |
+| Bước | Nội dung | Thời gian |
+|------|----------|-----------|
+| **5.2** | Chuẩn bị môi trường | ~30 phút |
+| **5.3** | Thiết lập Amazon VPC | ~20 phút |
+| **5.4** | Triển khai Amazon RDS | ~25 phút |
+| **5.5** | Triển khai Amazon EC2 & ASP.NET Core | ~45 phút |
+| **5.6** | Cấu hình Amazon S3 | ~20 phút |
+| **5.7** | Tích hợp Amazon Cognito | ~30 phút |
+| **5.8** | Dọn dẹp tài nguyên | ~15 phút |
+| **Tổng** | | **~3 giờ** |
 
 ---
 
 ## Chi phí ước tính
 
->  Tài khoản AWS mới có **12 tháng Free Tier**. Nếu đã hết Free Tier, chi phí ước tính như sau:
+> **AWS Free Tier** cho phép hầu hết người dùng mới thực hiện workshop mà không phát sinh chi phí. Nếu tài khoản của bạn đã hết Free Tier, chi phí ước tính như sau:
 
-| Dịch vụ         | Cấu hình              | Chi phí/tháng  |
-| --------------- | --------------------- | -------------- |
-| EC2 t3.micro    | 1 instance, On-Demand | ~$8.47         |
-| RDS db.t3.micro | PostgreSQL, Single-AZ | ~$15.33        |
-| Amazon S3       | 5GB standard          | ~$0.12         |
-| Amazon Cognito  | < 50,000 MAU          | $0.00          |
-| **Tổng**        |                       | **~$24/tháng** |
+| Dịch vụ | Cấu hình | Chi phí/tháng |
+|---------|----------|---------------|
+| Amazon EC2 (t3.micro) | 1 On-Demand Instance | ~$8.47 |
+| Amazon RDS (db.t3.micro) | PostgreSQL, Single-AZ | ~$15.33 |
+| Amazon S3 | 5 GB Standard Storage | ~$0.12 |
+| Amazon Cognito | < 50,000 Monthly Active Users | $0.00 |
+| **Tổng** | | **~$24/tháng** |
 
->  **Lưu ý**: Hãy chạy bước **5.8 - Dọn dẹp tài nguyên** ngay sau khi hoàn thành workshop để tránh phát sinh chi phí ngoài ý muốn.
+> **Lưu ý:** Sau khi hoàn thành workshop, hãy thực hiện **Bước 5.8 – Dọn dẹp tài nguyên** để xóa các tài nguyên AWS đã tạo và tránh phát sinh chi phí ngoài ý muốn.
