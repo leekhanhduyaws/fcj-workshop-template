@@ -1,43 +1,147 @@
 ---
-title : "Create an S3 Interface endpoint"
-date : 2024-01-01
-weight : 2
-chapter : false
-pre : " <b> 5.4.2 </b> "
+title: "Migrate & Seed Data"
+date: "2026-07-09"
+weight: 2
+chapter: false
+pre: "<b>5.4.2. </b>"
 ---
 
-In this section you will create and test an S3 interface endpoint using the simulated on-premises environment deployed as part of this workshop.
+After your Amazon RDS instance is ready, the next step is to configure the application to use PostgreSQL instead of SQLite. You will then run Entity Framework Core Migrations to create the database schema and optionally seed sample data.
 
-1. Return to the Amazon VPC menu. In the navigation pane, choose Endpoints, then click Create Endpoint.
+---
 
-2. In Create endpoint console:
-+ Name the interface endpoint
-+ In Service category, choose **aws services** 
+# 1. Update the Connection String
 
-![name](/images/5-Workshop/5.4-S3-onprem/s3-interface-endpoint1.png)
+Open the **appsettings.json** file in the FlashLearn project and update the connection string:
 
-3.  In the Search box, type S3 and press Enter. Select the endpoint named com.amazonaws.us-east-1.s3. Ensure that the Type column indicates Interface.
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=flashlearn-db.xxxx.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=flashlearn;Username=flashlearn_admin;Password=<YOUR_PASSWORD>"
+  }
+}
+```
 
-![service](/images/5-Workshop/5.4-S3-onprem/s3-interface-endpoint2.png)
+> **Note:** Replace `flashlearn-db.xxxx.ap-southeast-1.rds.amazonaws.com` with the **RDS Endpoint** you saved in **Step 5.4.1**, and enter your own password.
 
-4. For VPC, select VPC Cloud from the drop-down.
-{{% notice warning %}}
-Make sure to choose "VPC Cloud" and not "VPC On-prem"
-{{% /notice %}}
-+ Expand **Additional settings** and ensure that Enable DNS name is *not* selected (we will use this in the next part of the workshop)
+---
 
-![vpc](/images/5-Workshop/5.4-S3-onprem/s3-interface-endpoint3.png)
+# 2. Install the PostgreSQL Provider
 
-5. Select 2 subnets in the following AZs: us-east-1a and us-east-1b
+Make sure the project includes the **Npgsql.EntityFrameworkCore.PostgreSQL** package:
 
-![subnets](/images/5-Workshop/5.4-S3-onprem/s3-interface-endpoint4.png)
+```bash
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+```
 
-6. For Security group, choose SGforS3Endpoint:
+Next, update **Program.cs** to use PostgreSQL instead of SQLite:
 
-![sg](/images/5-Workshop/5.4-S3-onprem/s3-interface-endpoint5.png)
+```csharp
+// SQLite
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseSqlite(connectionString));
 
-7. Keep the default policy - full access and click Create endpoint
+// PostgreSQL
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+```
 
-![success](/images/5-Workshop/5.4-S3-onprem/s3-interface-endpoint-success.png)
+---
 
-Congratulation on successfully creating S3 interface endpoint. In the next step, we will test the interface endpoint.
+# 3. Create a Migration (If Needed)
+
+If your project does not already have a migration for PostgreSQL, create one by running:
+
+```bash
+dotnet ef migrations add InitialPostgreSQL
+```
+
+---
+
+# 4. Run the Migration on Amazon RDS
+
+Because Amazon RDS is deployed in a **Private Subnet**, you must connect to your EC2 instance before running the migration.
+
+### Step 1: Connect to EC2 via SSH
+
+```bash
+ssh -i flashlearn-key.pem ubuntu@<EC2-Public-IP>
+```
+
+### Step 2: Clone the Project and Run the Migration
+
+```bash
+# Clone the source code
+git clone <repo-url>
+cd WebHocTiengAnhFlashLearn
+
+# Install the .NET SDK
+sudo snap install dotnet-sdk --classic --channel=8.0
+
+# Configure the connection string
+export ConnectionStrings__DefaultConnection="Host=<RDS-Endpoint>;Port=5432;Database=flashlearn;Username=flashlearn_admin;Password=<YOUR_PASSWORD>"
+
+# Run the migration
+dotnet ef database update
+```
+
+### Step 3: Verify the Migration
+
+Connect to PostgreSQL:
+
+```bash
+psql -h <RDS-Endpoint> -U flashlearn_admin -d flashlearn
+```
+
+List all tables:
+
+```sql
+\dt
+```
+
+Expected output:
+
+```text
+ Schema |      Name       | Type  |      Owner
+--------+-----------------+-------+-----------------
+ public | AspNetRoles     | table | flashlearn_admin
+ public | AspNetUsers     | table | flashlearn_admin
+ public | Cards           | table | flashlearn_admin
+ public | Decks           | table | flashlearn_admin
+ public | UserProgress    | table | flashlearn_admin
+```
+
+---
+
+# 5. Seed Sample Data (Optional)
+
+If your application supports a database initializer, run:
+
+```bash
+dotnet run --seed
+```
+
+Or insert sample data directly into PostgreSQL:
+
+```sql
+INSERT INTO "Decks"
+("Id", "Name", "Description", "CreatedAt", "UserId")
+VALUES
+(gen_random_uuid(), '500 Basic English Vocabulary',
+ 'Basic A1 vocabulary', NOW(), NULL),
+
+(gen_random_uuid(), '100 Irregular Verbs',
+ 'A collection of common irregular verbs', NOW(), NULL);
+```
+
+---
+
+# Result
+
+After completing this step, you have:
+
+- Configured the application to use Amazon RDS PostgreSQL.
+- Created the database schema using Entity Framework Core Migrations.
+- Verified that the required tables were successfully created in Amazon RDS.
+- Seeded sample data into the database (optional).
