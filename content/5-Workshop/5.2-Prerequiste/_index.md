@@ -19,4 +19,4 @@ To follow this workshop, you should have:
 
 ## Preparation Tasks
 
-{{% children showhidden="false" %}}
+{{% children showhidden="false" /%}}
