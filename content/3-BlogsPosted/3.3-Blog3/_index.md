@@ -29,7 +29,7 @@ An AWS Data Lake architecture built with Amazon S3, AWS Glue, and Amazon Athena 
 ## Architecture Diagram
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog3/img3.png" width="700">
+  <img src="/images/3-BlogsPosted/Blog3/img3.png" width="700">
 </p>
 
 <p align="center">

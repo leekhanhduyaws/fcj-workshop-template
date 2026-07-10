@@ -24,7 +24,7 @@ Kiến trúc Data Lake sử dụng Amazon S3, AWS Glue và Amazon Athena là gi�
 ## Hình ảnh minh họa
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog3/img3.png" width="700">
+  <img src="/images/3-BlogsPosted/Blog3/img3.png" width="700">
 </p>
 
 <p align="center">

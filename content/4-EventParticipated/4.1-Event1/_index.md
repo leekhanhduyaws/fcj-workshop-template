@@ -143,7 +143,7 @@ Following the event, I began writing structured prompts, documenting project req
 ### Photos from the Event
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/4-EventsParticipated/img5.png" width="700">
+  <img src="/images/4-EventsParticipated/img5.png" width="700">
 </p>
 
 > Overall, FCAJ Community Day provided not only valuable technical knowledge about AI and AWS but also inspired me to develop a more structured learning mindset, collaborate more effectively with AI, and establish a clearer roadmap for my future career in Cloud Computing and Software Engineering.

@@ -47,7 +47,7 @@ From a technical perspective, the AWS-based architecture improves scalability, s
 FlashLearn is deployed within an Amazon VPC spanning two Availability Zones to provide high availability and fault tolerance in the event of infrastructure failures.
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/2-Proposal/img4.png" width="700">
+  <img src="/images/2-Proposal/img4.png" width="700">
 </p>
 
 ### AWS Services Used

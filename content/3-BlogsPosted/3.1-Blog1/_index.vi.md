@@ -25,7 +25,7 @@ Session Policies đặc biệt hữu ích trong các hệ thống Microservices,
 ## Hình ảnh minh họa
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog1/img1.png" width="700">
+  <img src="/images/3-BlogsPosted/Blog1/img1.png" width="700">
 </p>
 
 <p align="center">

@@ -85,7 +85,7 @@ Attending **AWS GameDay – Battle of the 8 Teams** as an audience member provid
 #### Event Photos
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/4-EventsParticipated/img6.png" width="700">
+  <img src="/images/4-EventsParticipated/img6.png" width="700">
 </p>
 
 > Participating in this event strengthened my AWS knowledge, enhanced my cloud architecture and problem-solving skills, and motivated me to continue preparing for AWS certifications and a professional career in Cloud Computing.

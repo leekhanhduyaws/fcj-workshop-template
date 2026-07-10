@@ -24,7 +24,7 @@ Event-Driven Architecture is particularly valuable for microservices, asynchrono
 
 ## Illustration
 <p align="center">
-  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog2/img2.png" width="700">
+  <img src="/images/3-BlogsPosted/Blog2/img2.png" width="700">
 </p>
 
 <p align="center">

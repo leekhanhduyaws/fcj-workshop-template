@@ -24,7 +24,7 @@ Session Policies are particularly valuable in microservices architectures, where
 ## Illustration
 
 <p align="center">
-  <img src="/fcj-workshop-template/images/3-BlogsPosted/Blog1/img1.png" width="700">
+  <img src="/images/3-BlogsPosted/Blog1/img1.png" width="700">
 </p>
 
 <p align="center">
