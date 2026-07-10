@@ -25,7 +25,9 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 17/04/2026 đến ngày 10/07/2026
 
-<img src="/fcj-workshop-template/images/avatar.png" width="300">
+<div style="display:flex; justify-content:center;">
+  <img src="/images/avatar.png" alt="Ảnh đại diện" style="width:450px;">
+</div>
 
 ### Nội dung báo cáo
 
