@@ -16,7 +16,7 @@ In this workshop, you will learn how to deploy an **ASP.NET Core 8.0** applicati
 ## What You Will Build
 
 <p style="font-size:1.5em; font-weight:bold;">
-  🔗 Live Demo: <a href="http://flash-learn.ap-southeast-1.elasticbeanstalk.com/" target="_blank">http://flash-learn.ap-southeast-1.elasticbeanstalk.com/</a>
+  🔗 Live Demo: <a href="https://d2rk4q7n3y3z05.cloudfront.net/Account/Register" target="_blank">https://d2rk4q7n3y3z05.cloudfront.net/Account/Register</a>
 </p>
 
 ```

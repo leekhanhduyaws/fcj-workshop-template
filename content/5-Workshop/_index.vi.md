@@ -16,7 +16,7 @@ Trong workshop này, bạn sẽ học cách triển khai ứng dụng **ASP.NET 
 ## Những gì bạn sẽ xây dựng
 
 <p style="font-size:1.5em; font-weight:bold;">
-  🔗 Demo trực tiếp: <a href="http://flash-learn.ap-southeast-1.elasticbeanstalk.com/" target="_blank">http://flash-learn.ap-southeast-1.elasticbeanstalk.com/</a>
+  🔗 Demo trực tiếp: <a href="https://d2rk4q7n3y3z05.cloudfront.net/Account/Register" target="_blank">https://d2rk4q7n3y3z05.cloudfront.net/Account/Register</a>
 </p>
 
 ```
